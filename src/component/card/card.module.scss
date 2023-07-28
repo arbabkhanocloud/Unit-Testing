@@ -1,0 +1,21 @@
+.card {
+    background-color: #e35151;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    cursor: grab;
+  }
+  
+  .card:hover {
+    background-color: #16068d;
+  }
+  
+  .card textarea{
+    width: 95%;
+    height: fit-content;
+  }
+
+.card-actions{
+  margin-top: 15px;
+}  
