@@ -46,7 +46,10 @@ const Column: React.FC<ColumnProps> = ({
     updateCard(column.id, cardId, content);
   };
 
-  const handleDragStart = (event: any, cardId: any) => {
+  const handleDragStart = (
+    event: React.DragEvent<HTMLDivElement>,
+    cardId: any
+  ) => {
     console.log("cardId:", cardId);
     event.dataTransfer.setData(
       "text/plain",
@@ -54,7 +57,7 @@ const Column: React.FC<ColumnProps> = ({
     );
   };
 
-  const handleDrop = (event: any) => {
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const data = event.dataTransfer.getData("text/plain");
     const { cardId, sourceColumnId } = JSON.parse(data);
@@ -68,6 +71,7 @@ const Column: React.FC<ColumnProps> = ({
   return (
     <div
       data-testid="column-component"
+      data-cy="column-component"
       className={`${classes["column"]}`}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
@@ -108,7 +112,7 @@ const Column: React.FC<ColumnProps> = ({
           </div>
         </div>
       ) : (
-        <div className={`${classes["add-card"]}`} onClick={handleAddCard}>
+        <div data-cy="plus-add-card"className={`${classes["add-card"]}`} onClick={handleAddCard}>
           + Add Card
         </div>
       )}

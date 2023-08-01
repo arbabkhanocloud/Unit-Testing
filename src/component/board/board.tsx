@@ -148,7 +148,7 @@ const Board: React.FC = () => {
           />
         ))}
         {showInput ? (
-          <div className={`${classes["add-column"]}`}>
+          <div data-cy="add-column" className={`${classes["add-column"]}`}>
             <textarea
               placeholder="List title"
               value={newColumnTitle}
@@ -169,7 +169,11 @@ const Board: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className={`${classes["add-column"]}`} onClick={handleAddColumn}>
+          <div
+            data-cy="add-column"
+            className={`${classes["add-column"]}`}
+            onClick={handleAddColumn}
+          >
             + Add another list
           </div>
         )}

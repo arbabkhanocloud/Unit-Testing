@@ -1,6 +1,6 @@
 import React from "react";
 import { screen, render, fireEvent } from "@testing-library/react";
-import Card from "./card";
+import Card from "../card";
 
 describe("Testing the card component", () => {
   let mockCard: any;

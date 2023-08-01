@@ -1,7 +1,7 @@
 import React from "react";
 import { screen, render, fireEvent } from "@testing-library/react";
-import Board from "./board";
-import { IColumn } from "./board";
+import Board from "../board";
+import { IColumn } from "../board";
 
 describe("testing the board component", () => {
   let mockInitialColumns: IColumn[];
@@ -154,31 +154,33 @@ describe("testing the board component", () => {
     expect(removedCard).not.toBeInTheDocument();
   });
 
-  //   test("Move a card from one column to another column", () => {
-  //     render(<Board />);
-  //     const addCardButtons = screen.getAllByText("+ Add Card");
-  //     fireEvent.click(addCardButtons[0]);
+  // test("Move a card from one column to another column", () => {
+  //   render(<Board />);
+  //   const addCardButtons = screen.getAllByText("+ Add Card");
+  //   fireEvent.click(addCardButtons[0]);
 
-  //     const textareaElement = screen.getByRole("textbox");
-  //     const addButton = screen.getByRole("button", { name: "Add Card" });
+  //   const textareaElement = screen.getByRole("textbox");
+  //   const addButton = screen.getByRole("button", { name: "Add Card" });
 
-  //     fireEvent.change(textareaElement, { target: { value: "Card to Move" } });
-  //     fireEvent.click(addButton);
+  //   fireEvent.change(textareaElement, { target: { value: "Card to Move" } });
+  //   fireEvent.click(addButton);
 
-  //     const draggables = screen.getAllByTestId("card-component");
-  //     const sourceColumnElement = screen.getByText("To Do");
-  //     const destinationColumnElement = screen.getByText("In Progress");
+  //   const draggables = screen.getAllByTestId("card-component");
+  //   const sourceColumnElement = screen.getByText("To Do");
+  //   const destinationColumnElement = screen.getByText("In Progress");
 
-  //     fireEvent.dragStart(draggables[0]);
-  //     fireEvent.dragOver(destinationColumnElement);
-  //     fireEvent.drop(destinationColumnElement);
+  //   fireEvent.dragStart(draggables[0]);
+  //   fireEvent.dragOver(destinationColumnElement);
+  //   fireEvent.drop(destinationColumnElement);
 
-  //     const movedCard = screen.getByText("Card to Move");
-  //     expect(movedCard).toBeInTheDocument();
+  //   const movedCard = screen.getByText("Card to Move");
+  //   expect(movedCard).toBeInTheDocument();
 
-  //     const sourceColumn = screen.getByText("To Do");
-  //     const destinationColumn = screen.getByText("In Progress");
-  //     expect(sourceColumn).not.toContain(movedCard);
-  //     expect(destinationColumn).toContain(movedCard);
-  //   });
+  //   const sourceColumn = screen.getByText("To Do");
+  //   const destinationColumn = screen.getByText("In Progress");
+  //   expect(sourceColumn).toBeInTheDocument();
+  //   expect(destinationColumn).toBeInTheDocument();
+  //   // expect(sourceColumn).not.toContain(movedCard);
+  //   // expect(destinationColumn).toContain(movedCard);
+  // });
 });

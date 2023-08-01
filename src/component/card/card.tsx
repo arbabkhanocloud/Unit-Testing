@@ -34,6 +34,7 @@ const Card: React.FC<CardProps> = ({
   return (
     <div
       data-testid="card-component"
+      data-cy="card-component"
       className={`${classes["card"]}`}
       draggable="true"
       onDragStart={(e) => onDragStart(e, card.id)}
@@ -41,6 +42,7 @@ const Card: React.FC<CardProps> = ({
       {editMode ? (
         <textarea
           data-testid="card-textarea"
+          data-cy="card-textarea"
           value={editedContent}
           onChange={(e) => setEditedContent(e.target.value)}
         />
