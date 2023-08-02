@@ -1,0 +1,41 @@
+.board {
+    display: flex;
+   
+}
+.board-wrapper{
+    min-height: 78.3vh;
+    overflow-x: auto; 
+    flex: 0 0 auto;
+    margin-left: 150px;
+    
+}
+.add-column {
+    height: fit-content;
+    max-width: 250px;
+    min-width: 250px; 
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: lighter;
+    cursor: pointer;
+}
+
+.add-column textarea{
+    margin-top: 5px;
+    border-radius: 5px;
+    resize: none;
+    width:70%
+}
+
+.add-column-buttons{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+  }
