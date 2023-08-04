@@ -1,6 +1,7 @@
 import { screen, render, fireEvent } from "@testing-library/react";
 import Column from "../column";
-import { IColumn } from "../../board/board";
+// import { IColumn } from "../../board/board";
+import { IColumn } from "../../../store/column/column.types";
 
 describe("testing the column component", () => {
   let mockColumn: IColumn;

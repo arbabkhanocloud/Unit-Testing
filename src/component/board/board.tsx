@@ -1,115 +1,44 @@
 import classes from "./board.module.scss";
 import React, { useState } from "react";
 import Column from "../column/column";
-
-export interface ICard {
-  id: string;
-  content: string;
-}
-
-export interface IColumn {
-  id: string;
-  title: string;
-  cards: ICard[];
-}
+import { RootState } from "../../store/store";
+import { useSelector, useDispatch, TypedUseSelectorHook } from "react-redux";
+import { IColumn } from "../../store/column/column.types";
+import { selectColumns } from "../../store/column/column.selector";
+import {
+  addColumn,
+  addCard,
+  deleteCard,
+  updateCard,
+  moveCard,
+} from "../../store/column/column.action";
 
 const Board: React.FC = () => {
   const [newColumnTitle, setNewColumnTitle] = useState<string>("");
   const [showInput, setShowInput] = useState(false);
   const [showRemoveColumnButton, setShowRemoveColumnButton] = useState(false);
-  const [columns, setColumns] = useState([
-    {
-      id: "todo",
-      title: "To Do",
-      cards: [],
-    },
-    {
-      id: "inProgress",
-      title: "In Progress",
-      cards: [],
-    },
-    {
-      id: "done",
-      title: "Done",
-      cards: [],
-    },
-  ]);
+  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const columns = useAppSelector(selectColumns);
+  const dispatch = useDispatch();
 
-  const addCard = (columnId: any, content: any) => {
-    const newCard = { id: `card${Date.now()}`, content };
-    setColumns((prevColumns: any) => {
-      const updatedColumns = prevColumns.map((column: any) =>
-        column.id === columnId
-          ? { ...column, cards: [...column.cards, newCard] }
-          : column
-      );
-      return updatedColumns;
-    });
+  const handleAddCard = (columnId: any, content: any) => {
+    dispatch(addCard(columnId, content));
   };
 
-  const deleteCard = (columnId: any, cardId: any) => {
-    setColumns((prevColumns) => {
-      const updatedColumns = prevColumns.map((column) =>
-        column.id === columnId
-          ? {
-              ...column,
-              cards: column.cards.filter((card: any) => card.id !== cardId),
-            }
-          : column
-      );
-      return updatedColumns;
-    });
+  const handleDeleteCard = (columnId: any, cardId: any) => {
+    dispatch(deleteCard(columnId, cardId));
   };
 
-  const updateCard = (columnId: any, cardId: any, content: any) => {
-    setColumns((prevColumns: any) => {
-      const updatedColumns = prevColumns.map((column: any) =>
-        column.id === columnId
-          ? {
-              ...column,
-              cards: column.cards.map((card: any) =>
-                card.id === cardId ? { ...card, content } : card
-              ),
-            }
-          : column
-      );
-      return updatedColumns;
-    });
+  const handleUpdateCard = (columnId: any, cardId: any, content: any) => {
+    dispatch(updateCard(columnId, cardId, content));
   };
 
-  const moveCard = (
+  const handleMoveCard = (
     sourceColumnId: any,
     destinationColumnId: any,
     cardId: any
   ) => {
-    if (sourceColumnId === destinationColumnId) return;
-    setColumns((prevColumns: any) => {
-      const sourceColumn = prevColumns.find(
-        (column: any) => column.id === sourceColumnId
-      );
-      const destinationColumn = prevColumns.find(
-        (column: any) => column.id === destinationColumnId
-      );
-      const cardToMove = sourceColumn.cards.find(
-        (card: any) => card.id === cardId
-      );
-
-      const updatedColumns = prevColumns.map((column: any) => {
-        if (column.id === sourceColumnId) {
-          return {
-            ...column,
-            cards: column.cards.filter((card: any) => card.id !== cardId),
-          };
-        }
-
-        if (column.id === destinationColumnId) {
-          return { ...column, cards: [...column.cards, cardToMove] };
-        }
-        return column;
-      });
-
-      return updatedColumns;
-    });
+    dispatch(moveCard(sourceColumnId, destinationColumnId, cardId));
   };
 
   const handleAddColumn = () => {
@@ -122,7 +51,7 @@ const Board: React.FC = () => {
         title: newColumnTitle,
         cards: [],
       };
-      setColumns((prevColumns: any) => [...prevColumns, newColumn]);
+      dispatch(addColumn(newColumn));
       setNewColumnTitle("");
       setShowInput(false);
       setShowRemoveColumnButton(false);
@@ -137,14 +66,14 @@ const Board: React.FC = () => {
   return (
     <div className={`${classes["board-wrapper"]}`}>
       <div className={`${classes["board"]}`}>
-        {columns.map((column) => (
+        {columns.map((column: IColumn) => (
           <Column
             key={column.id}
             column={column}
-            addCard={addCard}
-            deleteCard={deleteCard}
-            updateCard={updateCard}
-            moveCard={moveCard}
+            addCard={handleAddCard}
+            deleteCard={handleDeleteCard}
+            updateCard={handleUpdateCard}
+            moveCard={handleMoveCard}
           />
         ))}
         {showInput ? (

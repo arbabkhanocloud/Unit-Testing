@@ -1,7 +1,7 @@
 import classes from "./column.module.scss";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import Card from "../card/card";
-import { IColumn } from "../board/board";
+import { IColumn } from "../../store/column/column.types";
 
 interface ColumnProps {
   column: IColumn;
@@ -112,7 +112,11 @@ const Column: React.FC<ColumnProps> = ({
           </div>
         </div>
       ) : (
-        <div data-cy="plus-add-card"className={`${classes["add-card"]}`} onClick={handleAddCard}>
+        <div
+          data-cy="plus-add-card"
+          className={`${classes["add-card"]}`}
+          onClick={handleAddCard}
+        >
           + Add Card
         </div>
       )}

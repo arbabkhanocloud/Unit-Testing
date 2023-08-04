@@ -1,6 +1,6 @@
 import classes from "./card.module.scss";
 import React, { useState } from "react";
-import { ICard } from "../board/board";
+import { ICard } from "../../store/column/column.types";
 
 interface CardProps {
   card: ICard;
