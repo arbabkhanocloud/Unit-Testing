@@ -8,7 +8,7 @@ import {
 import { ColumnActionTypes } from "./column.types";
 import { IColumn } from "./column.types";
 
-const initialState: IColumn[] = [
+export const initialState: IColumn[] = [
   {
     id: "todo",
     title: "To Do",
